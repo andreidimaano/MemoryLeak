@@ -6,7 +6,7 @@ using std::cout;
 using std::endl;
 
 Person::Person(char *name, Person* father, Person* mother){
-    this->name = new char[strlen(name)];
+    this->name = new char[strlen(name) + 1];
     strcpy(this->name, name);
     this->father = father;
     this->mother = mother;
@@ -52,6 +52,8 @@ void Person::printLineage(char dir, int level){
             father->printLineage(dir, level + 1);
         }
     }
+    
+    delete temp;
 }
 
 /* helper function to compute the lineage
