@@ -16,7 +16,8 @@ Person::Person(char *name, Person* father, Person* mother){
 }
 
 Person::~Person(){
-    delete children;
+    delete[] children;
+    //delete all children
 }
 
 void Person::addChild(Person *newChild){
@@ -53,7 +54,8 @@ void Person::printLineage(char dir, int level){
         }
     }
     
-    delete temp;
+    //1. add dynamic delete which will delete the char* from compute relation
+    delete[] temp;
 }
 
 /* helper function to compute the lineage
@@ -68,7 +70,9 @@ char* Person::compute_relation(int level){
     for(int i = 2; i <= level; i++){
         char *temp2 = new char[strlen("great ") + strlen(temp) + 1];
         strcat(strcpy(temp2, "great "), temp);
-        temp = temp2;
+	//2. add delete temp to free up temp memory
+        delete temp;
+ 	temp = temp2;
     }
     return temp;
 }
@@ -81,4 +85,6 @@ void expand(Person ***t, int *MAX){
   memcpy(temp, *t, *MAX * sizeof(**t));
   *MAX *= 2;
   *t = temp;
+ 
+  //3. added delete temp
 }
