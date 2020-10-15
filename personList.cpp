@@ -12,13 +12,9 @@ PersonList::PersonList(){
 }
 
 PersonList::~PersonList(){
-    cout << endl << "personlist destructor called" << endl;
     
     for(unsigned i = 0; i < capacity; i++) {
-	if(theList[i]){
-	    cout << "current list person: " << theList[i]->getName() << endl;
-	    theList[i]->deletePerson();
-	}
+	delete theList[i];
     }
 
     delete [] theList;

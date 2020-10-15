@@ -20,17 +20,16 @@ Person::Person(char *name, Person* father, Person* mother){
 }
 
 Person::~Person(){
-    cout << "destructor called" << endl;
     delete[] children;
     delete[] name;
     //delete all children
 }
 
-void Person::deletePerson() {
-    cout << "deleting: " <<  this->getName() << endl;
-    delete[] name;
-    delete[] children;
-}
+//void Person::deletePerson() {
+   // cout << "deleting: " <<  this->getName() << endl;
+   // delete[] name;
+ //   delete[] children;
+//}
 
 void Person::addChild(Person *newChild){
     if(numChildren == capacity) expand(&children, &capacity);
@@ -83,7 +82,7 @@ char* Person::compute_relation(int level){
         char *temp2 = new char[strlen("great ") + strlen(temp) + 1];
         strcat(strcpy(temp2, "great "), temp);
 	//2. add delete temp to free up temp memory
-        delete temp;
+        delete [] temp;
  	temp = temp2;
     }
     return temp;
@@ -94,8 +93,12 @@ char* Person::compute_relation(int level){
  */
 void expand(Person ***t, int *MAX){
   Person **temp = new Person*[2 * *MAX];
+  for(unsigned i = 0; i < 2 * *MAX; i++) {
+	temp[i] = 0;
+  }
   memcpy(temp, *t, *MAX * sizeof(**t));
   *MAX *= 2;
+  delete [] *t;
   *t = temp;
  
   //3. added delete temp
