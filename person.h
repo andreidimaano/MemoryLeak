@@ -13,7 +13,9 @@ class Person{
     public:
         Person(char *name, Person* father, Person* mother);
         ~Person();
-
+	
+	void deletePerson();
+	
         const char* getName(){return name;}
 
         void addChild(Person *newChild);

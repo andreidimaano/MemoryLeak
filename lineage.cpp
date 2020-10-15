@@ -4,10 +4,6 @@
 
 int main() {
     PersonList theList;
-   // char *bob = "Bob";
-   // char *mark = "Mark";
-   // char *betty = "Betty";
-   // char *jim = "Jim";
 
     theList.addPerson("Bob", "Mark", "Betty");
     theList.addPerson("Jim", "Bob", "Sally");

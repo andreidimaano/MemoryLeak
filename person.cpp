@@ -6,6 +6,10 @@ using std::cout;
 using std::endl;
 
 Person::Person(char *name, Person* father, Person* mother){
+    //remove allocation
+    // this->name = name;  
+    //strcpy(this->name, name);
+    //this->name = (char*)malloc((strlen(name) + 1)*sizeof(char));
     this->name = new char[strlen(name) + 1];
     strcpy(this->name, name);
     this->father = father;
@@ -16,8 +20,16 @@ Person::Person(char *name, Person* father, Person* mother){
 }
 
 Person::~Person(){
+    cout << "destructor called" << endl;
     delete[] children;
+    delete[] name;
     //delete all children
+}
+
+void Person::deletePerson() {
+    cout << "deleting: " <<  this->getName() << endl;
+    delete[] name;
+    delete[] children;
 }
 
 void Person::addChild(Person *newChild){

@@ -12,6 +12,15 @@ PersonList::PersonList(){
 }
 
 PersonList::~PersonList(){
+    cout << endl << "personlist destructor called" << endl;
+    
+    for(unsigned i = 0; i < capacity; i++) {
+	if(theList[i]){
+	    cout << "current list person: " << theList[i]->getName() << endl;
+	    theList[i]->deletePerson();
+	}
+    }
+
     delete [] theList;
 }
 
@@ -25,12 +34,16 @@ void PersonList::addPerson(char* child_name, char* father_name, char* mother_nam
             cout << "ERROR: " << child_name << " already has parents!!!";
             return;
         } else if(!strcmp(theList[i]->getName(), father_name)) {
-            father = theList[i];
+           // delete father;
+	    father = theList[i];
         } else if(!strcmp(theList[i]->getName(), mother_name)) {
+           // delete mother;
             mother = theList[i];
         }
     }
-   
+
+    //add deletes before reassignment  
+ 
     if(father == 0){
       // father_name is not in the theList so create a new person
       father = new Person(father_name, 0, 0);
